@@ -149,16 +149,16 @@ class SushiRoulette {
         `;
         document.body.appendChild(fireworksContainer);
 
-        // 1단계: 대형 폭죽들 연속 폭발 (15개)
-        for (let i = 0; i < 15; i++) {
+        // 1단계: 대형 폭죽들 연속 폭발 (9개)
+        for (let i = 0; i < 9; i++) {
             setTimeout(() => {
                 this.createMegaFirework(fireworksContainer);
                 this.createStarBurst(fireworksContainer);
             }, i * 150);
         }
 
-        // 2단계: 하트 모양 폭죽들
-        for (let i = 0; i < 8; i++) {
+        // 2단계: 하트 모양 폭죽들 (5개)
+        for (let i = 0; i < 5; i++) {
             setTimeout(() => {
                 this.createHeartFirework(fireworksContainer);
             }, 500 + i * 200);
@@ -169,8 +169,8 @@ class SushiRoulette {
             this.createPetalRain(fireworksContainer);
         }, 800);
 
-        // 4단계: 연속 스파클 효과
-        for (let i = 0; i < 20; i++) {
+        // 4단계: 연속 스파클 효과 (12개)
+        for (let i = 0; i < 12; i++) {
             setTimeout(() => {
                 this.createSparkleEffect(fireworksContainer);
             }, 300 + i * 100);
@@ -181,12 +181,12 @@ class SushiRoulette {
             this.createRainbowFirework(fireworksContainer);
         }, 1200);
 
-        // 6초 후 모든 효과 정리
+        // 4초 후 모든 효과 정리
         setTimeout(() => {
             if (fireworksContainer.parentNode) {
                 fireworksContainer.parentNode.removeChild(fireworksContainer);
             }
-        }, 6000);
+        }, 4000);
     }
 
     // 대형 폭죽 생성
@@ -195,11 +195,11 @@ class SushiRoulette {
         const centerX = Math.random() * window.innerWidth;
         const centerY = Math.random() * (window.innerHeight * 0.5) + window.innerHeight * 0.1;
 
-        // 더 많은 파티클로 대형 폭죽 효과
-        for (let i = 0; i < 50; i++) {
+        // 파티클 수 조정 (30개)
+        for (let i = 0; i < 30; i++) {
             const particle = document.createElement('div');
             const color = colors[Math.floor(Math.random() * colors.length)];
-            const angle = (Math.PI * 2 * i) / 50;
+            const angle = (Math.PI * 2 * i) / 30;
             const velocity = Math.random() * 250 + 150;
             const size = Math.random() * 12 + 6;
 
@@ -251,10 +251,11 @@ class SushiRoulette {
         const centerX = Math.random() * window.innerWidth;
         const centerY = Math.random() * (window.innerHeight * 0.6) + window.innerHeight * 0.2;
 
-        for (let i = 0; i < 8; i++) {
+        // 별 개수 조정 (5개)
+        for (let i = 0; i < 5; i++) {
             const star = document.createElement('div');
             const color = starColors[Math.floor(Math.random() * starColors.length)];
-            const angle = (Math.PI * 2 * i) / 8;
+            const angle = (Math.PI * 2 * i) / 5;
             const distance = Math.random() * 200 + 100;
 
             star.innerHTML = '★';
@@ -304,10 +305,11 @@ class SushiRoulette {
         const centerX = Math.random() * window.innerWidth;
         const centerY = Math.random() * (window.innerHeight * 0.5) + window.innerHeight * 0.2;
 
-        for (let i = 0; i < 12; i++) {
+        // 하트 개수 조정 (7개)
+        for (let i = 0; i < 7; i++) {
             const heart = document.createElement('div');
             const color = heartColors[Math.floor(Math.random() * heartColors.length)];
-            const angle = (Math.PI * 2 * i) / 12;
+            const angle = (Math.PI * 2 * i) / 7;
             const distance = Math.random() * 180 + 80;
 
             heart.innerHTML = '💖';
@@ -354,7 +356,8 @@ class SushiRoulette {
     createPetalRain(container) {
         const petals = ['🌸', '🌺', '🌻', '🌼', '🌷', '🌹', '🏵️', '💐'];
         
-        for (let i = 0; i < 100; i++) {
+        // 꽃잎 개수 조정 (60개)
+        for (let i = 0; i < 60; i++) {
             setTimeout(() => {
                 const petal = document.createElement('div');
                 const petalType = petals[Math.floor(Math.random() * petals.length)];
@@ -402,7 +405,8 @@ class SushiRoulette {
         const centerX = Math.random() * window.innerWidth;
         const centerY = Math.random() * window.innerHeight;
 
-        for (let i = 0; i < 15; i++) {
+        // 스파클 개수 조정 (9개)
+        for (let i = 0; i < 9; i++) {
             const sparkle = document.createElement('div');
             const sparkleChar = ['✨', '⭐', '💫', '🌟'][Math.floor(Math.random() * 4)];
             
@@ -447,10 +451,11 @@ class SushiRoulette {
         const centerX = window.innerWidth / 2;
         const centerY = window.innerHeight / 3;
 
-        for (let i = 0; i < 70; i++) {
+        // 파티클 개수 조정 (42개)
+        for (let i = 0; i < 42; i++) {
             const particle = document.createElement('div');
             const color = rainbowColors[i % rainbowColors.length];
-            const angle = (Math.PI * 2 * i) / 70;
+            const angle = (Math.PI * 2 * i) / 42;
             const velocity = Math.random() * 300 + 200;
             const size = Math.random() * 15 + 8;
 
