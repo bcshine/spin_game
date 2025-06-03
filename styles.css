@@ -1,0 +1,193 @@
+@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 전체 페이지 스타일 */
+body {
+    /* 기본 폰트를 Nexon 폰트로 변경 */
+    font-family: 'NEXON Lv1 Gothic OTF', sans-serif;
+    /* 사용자의 시스템에 Nexon 폰트가 없을 경우를 대비하여 기본 sans-serif 폰트 지정 */
+    display: flex; /* Flexbox 레이아웃 사용 */
+    flex-direction: column; /* 항목들을 세로로 정렬 */
+    align-items: center; /* 가로축 중앙 정렬 */
+    justify-content: center; /* 세로축 중앙 정렬 (콘텐츠가 적을 경우 화면 중앙에 오도록) */
+    min-height: 100vh; /* 최소 높이를 화면 전체 높이로 설정 */
+    margin: 0; /* body의 기본 마진 제거 */
+    /* 깔끔한 그레이 그라데이션 배경 */
+    background: linear-gradient(135deg, #f2f2f2, #e0e0e0);
+    color: #333; /* 기본 텍스트 색상 */
+    padding: 20px; /* 전체적인 여백 */
+    box-sizing: border-box; /* padding과 border를 width/height에 포함 */
+}
+
+/* 게임 컨테이너 스타일 */
+.game-container {
+    text-align: center; /* 내부 모든 요소 중앙정렬 */
+    background-color: #ffffff; /* 흰색 배경 */
+    padding: 30px;
+    border-radius: 15px; /* 모서리 둥글게 */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 효과 */
+    width: 100%;
+    max-width: 500px; /* 최대 너비 제한 */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 모든 자식 요소 중앙정렬 */
+}
+
+/* 제목 스타일 */
+h1 {
+    font-size: 2.2em; /* 제목 폰트 크기 */
+    color: #d9534f; /* 포인트 색상 (예: 스시의 붉은색 계열) */
+    margin: 0 auto 10px auto; /* 완전한 중앙정렬 */
+    font-weight: bold; /* 굵게 */
+    text-align: center; /* 텍스트 중앙정렬 */
+    width: 100%;
+}
+
+/* 부제목 스타일 */
+.subtitle {
+    font-size: 1.1em; /* 부제목 폰트 크기 */
+    color: #777; /* 부드러운 회색 */
+    margin: 0 auto 30px auto; /* 완전한 중앙정렬 */
+    text-align: center; /* 텍스트 중앙정렬 */
+    width: 100%;
+}
+
+/* 룰렛 컨테이너 스타일 */
+.wheel-container {
+    position: relative; /* 자식 요소(포인터)의 absolute 위치 기준 */
+    width: 80vw; /* 뷰포트 너비의 80% */
+    height: 80vw; /* 뷰포트 너비의 80% (정사각형 유지) */
+    max-width: 400px; /* 최대 크기 제한 */
+    max-height: 400px; /* 최대 크기 제한 */
+    margin: 0 auto 30px auto; /* 완전한 중앙정렬 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 룰렛 캔버스 스타일 */
+#wheelCanvas {
+    width: 100%; /* 부모 요소(wheel-container) 너비에 맞춤 */
+    height: 100%; /* 부모 요소(wheel-container) 높이에 맞춤 */
+    border-radius: 50%; /* 완벽한 원형 */
+    /* 그림자 효과를 좀 더 세련되게 */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15), inset 0 0 10px rgba(0,0,0,0.05);
+    /* 회전 애니메이션 부드럽게 */
+    transition: transform 5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    display: block; /* block으로 설정하여 중앙정렬 보장 */
+    margin: 0 auto; /* 추가 중앙정렬 */
+}
+
+/* 포인터 스타일 */
+.pointer {
+    width: 0;
+    height: 0;
+    /* 삼각형 모양 만들기 (border 트릭 사용) */
+    border-left: 15px solid transparent; /* 왼쪽 투명 테두리 */
+    border-right: 15px solid transparent; /* 오른쪽 투명 테두리 */
+    border-top: 25px solid #d9534f; /* 위쪽 빨간색 테두리 (포인터 색상) */
+    position: absolute; /* 룰렛 컨테이너 기준으로 위치 지정 */
+    top: -10px; /* 룰렛 중앙에서 약간 위로 (겹치지 않도록) */
+    left: 50%; /* 가로 중앙 */
+    transform: translateX(-50%); /* 정확한 가로 중앙 정렬 */
+    z-index: 10; /* 다른 요소보다 위에 표시 */
+    filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.2)); /* 포인터 그림자 */
+}
+
+/* 결과 텍스트 스타일 */
+#resultText {
+    font-size: 1.8em; /* 결과 텍스트 폰트 크기 */
+    color: #2c3e50; /* 결과 텍스트 색상 (짙은 네이비 계열) */
+    margin: 0 auto 30px auto; /* 완전한 중앙정렬 */
+    font-weight: bold; /* 굵게 */
+    min-height: 1.8em; /* 텍스트가 없을 때도 높이 유지 (깜빡임 방지) */
+    opacity: 0; /* 초기에는 숨김 (투명) */
+    transition: opacity 0.5s ease-in-out; /* 나타날 때 부드러운 효과 */
+    text-align: center; /* 텍스트 중앙정렬 */
+    width: 100%;
+    display: block; /* block으로 설정하여 중앙정렬 보장 */
+}
+
+/* 결과 텍스트 보일 때 스타일 */
+#resultText.visible {
+    opacity: 1; /* 보이게 (불투명) */
+}
+
+/* 시작 버튼 스타일 */
+#spinButton {
+    background-color: #5cb85c; /* 산뜻한 녹색 계열 */
+    color: white; /* 글자색 흰색 */
+    border: none; /* 테두리 없음 */
+    padding: 15px 30px; /* 내부 여백 */
+    font-size: 1.2em; /* 폰트 크기 */
+    border-radius: 8px; /* 모서리 약간 둥글게 */
+    cursor: pointer; /* 마우스 오버 시 포인터 모양 변경 */
+    transition: background-color 0.3s ease, transform 0.1s ease; /* 부드러운 색상 및 크기 변경 효과 */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* 버튼 그림자 */
+    font-weight: bold;
+    margin: 0 auto; /* 완전한 중앙정렬 */
+    display: block; /* block으로 설정하여 중앙정렬 보장 */
+    font-family: 'NEXON Lv1 Gothic OTF', sans-serif; /* 버튼에도 Nexon 폰트 적용 */
+}
+
+/* 버튼에 마우스 올렸을 때 스타일 */
+#spinButton:hover {
+    background-color: #4cae4c; /* 약간 더 어두운 녹색 */
+}
+
+/* 버튼 눌렀을 때 스타일 */
+#spinButton:active {
+    background-color: #449d44; /* 더 어두운 녹색 */
+    transform: scale(0.98); /* 살짝 작아지는 효과 */
+}
+
+/* 버튼 비활성화 시 스타일 */
+#spinButton:disabled {
+    background-color: #cccccc; /* 회색으로 변경 */
+    cursor: not-allowed; /* 커서 모양 변경 (작동 안 함 표시) */
+    box-shadow: none;
+}
+
+/* 모바일 화면 대응 (화면 너비 600px 이하) */
+@media (max-width: 600px) {
+    .game-container {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    h1 {
+        font-size: 1.8em; /* 모바일에서 제목 폰트 크기 줄임 */
+    }
+
+    .subtitle {
+        font-size: 1em; /* 모바일에서 부제목 폰트 크기 줄임 */
+        margin-bottom: 20px;
+    }
+
+    .wheel-container {
+        width: 75vw; /* 모바일에서 룰렛 크기 약간 줄임 */
+        height: 75vw;
+        margin-bottom: 20px;
+    }
+    
+    .pointer {
+        border-left-width: 12px;
+        border-right-width: 12px;
+        border-top-width: 20px;
+        top: -8px;
+    }
+
+    #resultText {
+        font-size: 1.5em; /* 모바일에서 결과 텍스트 폰트 크기 줄임 */
+        margin-bottom: 20px;
+    }
+
+    #spinButton {
+        padding: 12px 25px; /* 모바일에서 버튼 내부 여백 줄임 */
+        font-size: 1.1em; /* 모바일에서 버튼 폰트 크기 줄임 */
+    }
+} 

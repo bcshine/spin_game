@@ -1,0 +1,52 @@
+<!-- HTML 문서임을 선언하는 DOCTYPE 정의 -->
+<!DOCTYPE html>
+<!-- HTML 문서의 시작, 한국어(ko)를 주 언어로 설정 -->
+<html lang="ko">
+<!-- HTML 문서의 메타데이터를 담는 head 태그 시작 -->
+<head>
+    <!-- 문서의 문자 인코딩을 UTF-8로 설정 -->
+    <meta charset="UTF-8">
+    <!-- 뷰포트 설정을 통해 다양한 디바이스에서의 반응형 동작을 제어 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 웹 페이지의 제목을 설정 (브라우저 탭에 표시) -->
+    <title>스시도쿠 행운의 룰렛!</title>
+    <!-- 외부 CSS 파일(styles.css)을 연결하여 HTML 요소들의 스타일을 정의 -->
+    <link rel="stylesheet" href="styles.css">
+<!-- head 태그 종료 -->
+</head>
+<!-- 웹 페이지의 실제 내용을 담는 body 태그 시작 -->
+<body>
+    <!-- 전체 게임 요소를 감싸는 최상위 컨테이너 div 시작 -->
+    <div class="container">
+        <!-- 게임의 주 제목을 표시하는 h1 태그 -->
+        <h1 class="title">스시도쿠 행운의 룰렛!</h1>
+        <!-- 게임의 부제목 또는 설명을 표시하는 p 태그 -->
+        <p class="subtitle">버튼을 눌러 행운을 가져가세요</p>
+        
+        <!-- 룰렛판(canvas)과 포인터를 감싸는 컨테이너 div 시작 -->
+        <div class="wheel-container">
+            <!-- 룰렛판을 그릴 HTML5 canvas 요소, id는 JavaScript에서 참조하기 위함 -->
+            <canvas id="wheelCanvas"></canvas> <!-- 초기 width와 height는 CSS 또는 JS에서 설정 -->
+            <!-- 룰렛판의 현재 선택 항목을 가리키는 포인터 div -->
+            <div class="pointer"></div>
+        <!-- 룰렛판 컨테이너 div 종료 -->
+        </div>
+        
+        <!-- 당첨 결과를 표시할 영역 div 시작, id는 JavaScript에서 참조하기 위함 -->
+        <div class="result-display" id="resultDisplay">
+            <!-- 실제 당첨 결과 텍스트가 표시될 p 태그, id는 JavaScript에서 참조하기 위함 -->
+            <p id="resultText"></p>
+        <!-- 결과 표시 영역 div 종료 -->
+        </div>
+        
+        <!-- 룰렛을 돌리기 위한 버튼, id는 JavaScript에서 참조하기 위함 -->
+        <button class="spin-button" id="spinButton">시작</button>
+    <!-- 최상위 컨테이너 div 종료 -->
+    </div>
+    
+    <!-- 외부 JavaScript 파일(script.js)을 연결하여 게임의 동적 로직을 구현 -->
+    <script src="script.js"></script>
+<!-- body 태그 종료 -->
+</body>
+<!-- HTML 문서 종료 -->
+</html> 
