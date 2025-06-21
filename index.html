@@ -19,7 +19,7 @@
     <!-- 전체 게임 요소를 감싸는 최상위 컨테이너 div 시작 -->
     <div class="container">
         <!-- 게임의 주 제목을 표시하는 h1 태그 -->
-        <h1 class="title">스시도쿠 행운의 룰렛!</h1>
+        <h1 class="title">행운의 룰렛!</h1>
         <!-- 게임의 부제목 또는 설명을 표시하는 p 태그 -->
         <p class="subtitle">버튼을 눌러 행운을 가져가세요</p>
         
@@ -43,6 +43,21 @@
         <button class="spin-button" id="spinButton">시작</button>
     <!-- 최상위 컨테이너 div 종료 -->
     </div>
+    
+    <!-- 꽝 애니메이션용 이미지 요소 -->
+    <div class="fail-animation" id="failAnimation">
+        <img src="ggg.png" alt="꽝" class="fail-image" id="failImage">
+    </div>
+    
+    <!-- 실패 사운드 오디오 요소 -->
+    <audio id="failSound" preload="auto">
+        <source src="fail_02.mp3" type="audio/mpeg">
+    </audio>
+    
+    <!-- 당첨 사운드 오디오 요소 -->
+    <audio id="winSound" preload="auto">
+        <source src="Glissando_Up.mp3" type="audio/mpeg">
+    </audio>
     
     <!-- 외부 JavaScript 파일(script.js)을 연결하여 게임의 동적 로직을 구현 -->
     <script src="script.js"></script>

@@ -39,7 +39,7 @@ body {
 
 /* 제목 스타일 */
 h1 {
-    font-size: 2.2em; /* 제목 폰트 크기 */
+    font-size: 3.2em; /* 제목 폰트 크기 */
     color: #d9534f; /* 포인트 색상 (예: 스시의 붉은색 계열) */
     margin: 0 auto 10px auto; /* 완전한 중앙정렬 */
     font-weight: bold; /* 굵게 */
@@ -54,6 +54,7 @@ h1 {
     margin: 0 auto 30px auto; /* 완전한 중앙정렬 */
     text-align: center; /* 텍스트 중앙정렬 */
     width: 100%;
+    margin-bottom: 30px;
 }
 
 /* 룰렛 컨테이너 스타일 */
@@ -152,6 +153,54 @@ h1 {
     box-shadow: none;
 }
 
+/* 꽝 애니메이션 스타일 */
+.fail-animation {
+    position: fixed; /* 화면에 고정 */
+    top: 50%; /* 화면 중앙 세로 위치 */
+    left: -200px; /* 화면 왼쪽 밖에서 시작 */
+    z-index: 9999; /* 다른 모든 요소보다 위에 표시 */
+    pointer-events: none; /* 클릭 이벤트 무시 */
+    transform: translateY(-50%); /* 정확한 세로 중앙 정렬 */
+    opacity: 0; /* 초기에는 투명 */
+}
+
+.fail-image {
+    width: 150px; /* 이미지 크기 */
+    height: auto; /* 비율 유지 */
+    filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.3)); /* 그림자 효과 */
+}
+
+/* 꽝 애니메이션 실행 스타일 */
+.fail-animation.active {
+    animation: failFly 3s ease-in-out forwards; /* 3초간 애니메이션 */
+}
+
+/* 꽝 날아가는 애니메이션 키프레임 */
+@keyframes failFly {
+    0% {
+        left: -200px; /* 왼쪽 밖에서 시작 */
+        opacity: 0; /* 투명 */
+        transform: translateY(-50%) rotate(-20deg) scale(0.5); /* 작게 시작 */
+    }
+    10% {
+        opacity: 1; /* 나타남 */
+        transform: translateY(-50%) rotate(-10deg) scale(0.8); /* 커지기 시작 */
+    }
+    50% {
+        left: 50%; /* 화면 중앙 */
+        transform: translateY(-50%) translateX(-50%) rotate(0deg) scale(1.2); /* 최대 크기 */
+    }
+    90% {
+        opacity: 1; /* 계속 보임 */
+        transform: translateY(-50%) rotate(10deg) scale(0.8); /* 작아지기 시작 */
+    }
+    100% {
+        left: calc(100% + 200px); /* 오른쪽 밖으로 나감 */
+        opacity: 0; /* 사라짐 */
+        transform: translateY(-50%) rotate(20deg) scale(0.5); /* 작게 끝 */
+    }
+}
+
 /* 모바일 화면 대응 (화면 너비 600px 이하) */
 @media (max-width: 600px) {
     .game-container {
@@ -189,5 +238,10 @@ h1 {
     #spinButton {
         padding: 12px 25px; /* 모바일에서 버튼 내부 여백 줄임 */
         font-size: 1.1em; /* 모바일에서 버튼 폰트 크기 줄임 */
+    }
+
+    /* 모바일에서 꽝 이미지 크기 조정 */
+    .fail-image {
+        width: 100px; /* 모바일에서 더 작게 */
     }
 } 

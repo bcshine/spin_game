@@ -10,10 +10,15 @@ class SushiRoulette {
         this.spinButton = document.getElementById('spinButton');
         // HTML에서 id가 'resultText'인 p 요소를 가져와서 this.resultTextElement에 할당 (결과 표시용)
         this.resultTextElement = document.getElementById('resultText');
+        // 꽝 애니메이션 요소들
+        this.failAnimation = document.getElementById('failAnimation');
+        this.failSound = document.getElementById('failSound');
+        // 당첨 사운드 요소
+        this.winSound = document.getElementById('winSound');
 
         // 룰렛판의 각 구획(segment)에 대한 정보를 배열로 정의
         this.segments = [
-            { text: '연어장 2 피스', color: '#FFDAB9' }, // PeachPuff
+            { text: '1000원 할인', color: '#FFDAB9' }, // PeachPuff
             { text: '10% 할인', color: '#ADD8E6' },    // LightBlue
             { text: '미니샐러드', color: '#90EE90' },  // LightGreen
             { text: '음료수 한잔', color: '#FFB6C1' },  // LightPink
@@ -546,6 +551,52 @@ class SushiRoulette {
         }, 4000);
     }
 
+    // 꽝 애니메이션과 사운드 재생 함수
+    createFailEffect() {
+        // 실패 사운드 재생
+        this.failSound.currentTime = 0; // 처음부터 재생
+        const soundPromise = this.failSound.play();
+        
+        // 사운드 재생 에러 처리
+        if (soundPromise !== undefined) {
+            soundPromise.catch(error => {
+                console.log('사운드 재생 실패:', error);
+            });
+        }
+
+        // 4초 후 사운드 정지
+        setTimeout(() => {
+            this.failSound.pause();
+            this.failSound.currentTime = 0;
+        }, 4000);
+
+        // 꽝 애니메이션 시작
+        this.failAnimation.classList.add('active');
+
+        // 3초 후 애니메이션 클래스 제거
+        setTimeout(() => {
+            this.failAnimation.classList.remove('active');
+        }, 3000);
+    }
+
+    // 당첨 사운드 재생 함수
+    createWinEffect() {
+        // 당첨 사운드 재생
+        this.winSound.currentTime = 0; // 처음부터 재생
+        const soundPromise = this.winSound.play();
+        
+        // 사운드 재생 에러 처리
+        if (soundPromise !== undefined) {
+            soundPromise.catch(error => {
+                console.log('당첨 사운드 재생 실패:', error);
+            });
+        }
+
+        // 초강력 화려한 폭죽과 꽃놀이 효과 실행
+        this.createSuperFireworks();
+        this.createMegaCelebrationEffect();
+    }
+
     // 룰렛 회전 로직
     spin() {
         if (this.isSpinning) return; 
@@ -574,11 +625,13 @@ class SushiRoulette {
             const pointedSegmentIndex = this.getPointerSegmentIndex();
             const winner = this.segments[pointedSegmentIndex];
             
-            // 당첨 결과가 '꽝'이 아닌 경우에만 초강력 폭죽 효과 실행
-            if (winner.text !== '꽝, 한번더!') {
-                // 초강력 화려한 폭죽과 꽃놀이 효과 실행
-                this.createSuperFireworks();
-                this.createMegaCelebrationEffect();
+            // 당첨 결과에 따른 효과 실행
+            if (winner.text === '꽝, 한번더!') {
+                // 꽝 애니메이션과 사운드 실행
+                this.createFailEffect();
+            } else {
+                // 당첨 사운드와 초강력 화려한 폭죽과 꽃놀이 효과 실행
+                this.createWinEffect();
             }
             
             // 결과 표시
